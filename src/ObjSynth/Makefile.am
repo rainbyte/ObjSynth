@@ -1,2 +1,3 @@
 noinst_LIBRARIES = libobjsynth.a
-libobjsynth_a_SOURCES = ObjSynthSettings.h ObjSynthSettings.m
+libobjsynth_a_SOURCES = ObjSynthSettings.h ObjSynthSettings.m \
+                        ObjSynthSynthesizer.h ObjSynthSynthesizer.m
