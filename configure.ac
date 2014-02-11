@@ -55,6 +55,7 @@ AC_SUBST(CPPFLAGS)
 AC_CONFIG_FILES([
         Makefile
         src/Makefile
+        src/ObjSynth/Makefile
 ])
 
 AC_OUTPUT

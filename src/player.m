@@ -1,19 +1,20 @@
 #include <fluidsynth.h>
 
-int main(int argc, char** argv) 
+#import "ObjSynth/ObjSynthSettings.h"
+
+int main(int argc, char** argv)
 {
     int i;
-    fluid_settings_t* settings;
+    ObjSynthSettings *synthSettings = [[ObjSynthSettings alloc] init];;
     fluid_synth_t* synth;
     fluid_player_t* player;
     fluid_audio_driver_t* adriver;
-    settings = new_fluid_settings();
     
-    fluid_settings_setstr(settings, "audio.driver", "pulseaudio");
-    
-    synth = new_fluid_synth(settings);
+    [synthSettings setOption:@"audio.driver" toStr:@"pulseaudio"];
+
+    synth = new_fluid_synth([synthSettings origImpl]);
     player = new_fluid_player(synth);
-    adriver = new_fluid_audio_driver(settings, synth);
+    adriver = new_fluid_audio_driver([synthSettings origImpl], synth);
     /* process command line arguments */
     for (i = 1; i < argc; i++) {
         if (fluid_is_soundfont(argv[i])) {
@@ -31,6 +32,6 @@ int main(int argc, char** argv)
     delete_fluid_audio_driver(adriver);
     delete_fluid_player(player);
     delete_fluid_synth(synth);
-    delete_fluid_settings(settings);
+    delete_fluid_settings([synthSettings origImpl]);
     return 0;
 }
