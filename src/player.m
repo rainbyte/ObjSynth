@@ -1,5 +1,6 @@
 #include <fluidsynth.h>
 
+#import "ObjSynth/ObjSynthPlayer.h"
 #import "ObjSynth/ObjSynthSettings.h"
 #import "ObjSynth/ObjSynthSynthesizer.h"
 
@@ -11,12 +12,13 @@ int main(int argc, char** argv)
     ObjSynthSynthesizer *synthSynthesizer =
         [[ObjSynthSynthesizer alloc] initWithSettings:synthSettings];
     
-    fluid_player_t* player;
+    ObjSynthPlayer *synthPlayer =
+        [[ObjSynthPlayer alloc] initWithSynthesizer:synthSynthesizer];
+
     fluid_audio_driver_t* adriver;
     
     [synthSettings setOption:@"audio.driver" toStr:@"pulseaudio"];
 
-    player = new_fluid_player([synthSynthesizer wrappedImpl]);
     adriver = new_fluid_audio_driver([synthSettings origImpl],
                                      [synthSynthesizer wrappedImpl]);
     /* process command line arguments */
@@ -25,16 +27,14 @@ int main(int argc, char** argv)
            fluid_synth_sfload([synthSynthesizer wrappedImpl], argv[1], 1);
         }
         if (fluid_is_midifile(argv[i])) {
-            fluid_player_add(player, argv[i]);
+            [synthPlayer addFilePath:[OFString stringWithUTF8String:argv[i]]];
         }
     }
-    /* play the midi files, if any */
-    fluid_player_play(player);
-    /* wait for playback termination */
-    fluid_player_join(player);
+
+    [synthPlayer play];
     /* cleanup */
     delete_fluid_audio_driver(adriver);
-    delete_fluid_player(player);
+    delete_fluid_player([synthPlayer wrappedImpl]);
     delete_fluid_synth([synthSynthesizer wrappedImpl]);
     delete_fluid_settings([synthSettings origImpl]);
     return 0;
