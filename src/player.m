@@ -8,6 +8,7 @@ int main(int argc, char** argv)
 {
     int i;
     ObjSynthSettings *synthSettings = [[ObjSynthSettings alloc] init];;
+    [synthSettings setOption:@"audio.driver" toStr:@"pulseaudio"];
 
     ObjSynthSynthesizer *synthSynthesizer =
         [[ObjSynthSynthesizer alloc] initWithSettings:synthSettings];
@@ -16,11 +17,9 @@ int main(int argc, char** argv)
         [[ObjSynthPlayer alloc] initWithSynthesizer:synthSynthesizer];
 
     fluid_audio_driver_t* adriver;
-    
-    [synthSettings setOption:@"audio.driver" toStr:@"pulseaudio"];
-
     adriver = new_fluid_audio_driver([synthSettings origImpl],
                                      [synthSynthesizer wrappedImpl]);
+
     /* process command line arguments */
     for (i = 1; i < argc; i++) {
         if (fluid_is_soundfont(argv[i])) {
