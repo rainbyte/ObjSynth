@@ -6,7 +6,7 @@
 {
     self = [super init];
     if (self) {
-        _wrappedImpl = new_fluid_synth([settings origImpl]);
+        _wrappedImpl = new_fluid_synth([settings wrappedImpl]);
     }
     
     return self;

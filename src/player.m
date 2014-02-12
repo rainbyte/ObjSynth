@@ -17,7 +17,7 @@ int main(int argc, char** argv)
         [[ObjSynthPlayer alloc] initWithSynthesizer:synthSynthesizer];
 
     fluid_audio_driver_t* adriver;
-    adriver = new_fluid_audio_driver([synthSettings origImpl],
+    adriver = new_fluid_audio_driver([synthSettings wrappedImpl],
                                      [synthSynthesizer wrappedImpl]);
 
     /* process command line arguments */
@@ -35,6 +35,6 @@ int main(int argc, char** argv)
     delete_fluid_audio_driver(adriver);
     delete_fluid_player([synthPlayer wrappedImpl]);
     delete_fluid_synth([synthSynthesizer wrappedImpl]);
-    delete_fluid_settings([synthSettings origImpl]);
+    delete_fluid_settings([synthSettings wrappedImpl]);
     return 0;
 }
