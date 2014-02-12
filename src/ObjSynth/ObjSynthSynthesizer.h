@@ -8,4 +8,6 @@
 
 - (id)initWithSettings:(ObjSynthSettings *)settings;
 
+- (void)addSoundFontPath:(OFString *)sfPath;
+
 @end

@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     /* process command line arguments */
     for (i = 1; i < argc; i++) {
         if (fluid_is_soundfont(argv[i])) {
-           fluid_synth_sfload([synthSynthesizer wrappedImpl], argv[1], 1);
+            [synthSynthesizer addSoundFontPath:[OFString stringWithUTF8String:argv[i]]];
         }
         if (fluid_is_midifile(argv[i])) {
             [synthPlayer addFilePath:[OFString stringWithUTF8String:argv[i]]];

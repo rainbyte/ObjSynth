@@ -12,4 +12,9 @@
     return self;
 }
 
+- (void)addSoundFontPath:(OFString *)sfPath
+{
+    fluid_synth_sfload(_wrappedImpl, [sfPath UTF8String], 1);
+}
+
 @end
