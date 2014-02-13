@@ -3,6 +3,7 @@
 #import "ObjSynth/ObjSynthPlayer.h"
 #import "ObjSynth/ObjSynthSettings.h"
 #import "ObjSynth/ObjSynthSynthesizer.h"
+#import "ObjSynth/ObjSynthAudioDriver.h"
 
 int main(int argc, char** argv)
 {
@@ -16,9 +17,9 @@ int main(int argc, char** argv)
     ObjSynthPlayer *synthPlayer =
         [[ObjSynthPlayer alloc] initWithSynthesizer:synthSynthesizer];
 
-    fluid_audio_driver_t* adriver;
-    adriver = new_fluid_audio_driver([synthSettings wrappedImpl],
-                                     [synthSynthesizer wrappedImpl]);
+    ObjSynthAudioDriver *synthAudioDriver =
+        [[ObjSynthAudioDriver alloc] initWithSettings:synthSettings
+                                             andSynth:synthSynthesizer];
 
     /* process command line arguments */
     for (i = 1; i < argc; i++) {
@@ -32,7 +33,7 @@ int main(int argc, char** argv)
 
     [synthPlayer play];
     /* cleanup */
-    delete_fluid_audio_driver(adriver);
+    delete_fluid_audio_driver([synthAudioDriver wrappedImpl]);
     delete_fluid_player([synthPlayer wrappedImpl]);
     delete_fluid_synth([synthSynthesizer wrappedImpl]);
     delete_fluid_settings([synthSettings wrappedImpl]);
