@@ -1,6 +1,7 @@
 # -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
+AC_PREREQ([2.69])
 AC_INIT([ObjSynth], [0.1], [alvarofernandogarcia@gmail.com])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/player.m])
@@ -11,6 +12,7 @@ AS_IF([test x"$OBJFW_CONFIG" = x""], [
 ])
 
 AC_LANG([Objective C])
+AC_PROG_CC
 AC_PROG_OBJC([clang])
 AC_PROG_OBJCPP
 AC_PROG_LN_S
