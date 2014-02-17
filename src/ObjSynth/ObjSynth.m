@@ -54,6 +54,23 @@
     fluid_synth_sfunload(_wrappedSynth, sfId, preset);
 }
 
+- (void)noteOnAtChannel:(int)chan withKey:(int)key andVelocity:(int)vel
+{
+    if (key < 0 || key > 128) return;
+    if (chan < 0) return;
+    if (vel < 0 || vel > 128) return;
+
+    fluid_synth_noteon(_wrappedSynth, chan, key, vel);
+}
+
+- (void)noteOffAtChannel:(int)chan withKey:(int)key
+{
+    if (key < 0 || key > 128) return;
+    if (chan < 0) return;
+
+    fluid_synth_noteoff(_wrappedSynth, chan, key);
+}
+
 - (void)loadMidiFile:(OFString *)path
 {
     if (_wrappedPlayer == NULL) return;
