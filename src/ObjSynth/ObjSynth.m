@@ -42,9 +42,16 @@
     fluid_settings_setstr(_wrappedSettings, [option UTF8String], [str UTF8String]);
 }
 
-- (void)loadSoundFont:(OFString *)path
+- (int)loadSoundFont:(OFString *)path withPreset:(int)preset
 {
-    fluid_synth_sfload(_wrappedSynth, [path UTF8String], 0);
+    int sfId = fluid_synth_sfload(_wrappedSynth, [path UTF8String], preset);
+
+    return sfId;
+}
+
+- (void)unloadSoundFont:(int)sfId withPreset:(int)preset
+{
+    fluid_synth_sfunload(_wrappedSynth, sfId, preset);
 }
 
 - (void)loadMidiFile:(OFString *)path

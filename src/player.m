@@ -15,7 +15,7 @@ int main(int argc, char** argv)
     for (i = 1; i < argc; i++) {
         OFString *argument = [OFString stringWithUTF8String:argv[i]];
         if ([ObjSynth isSoundFont:argument]) {
-            [synth loadSoundFont:argument];
+            [synth loadSoundFont:argument withPreset:0];
         }
         if ([ObjSynth isMidiFile:argument]) {
             [synth loadMidiFile:argument];

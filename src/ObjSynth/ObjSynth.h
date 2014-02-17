@@ -7,7 +7,8 @@
 
 - (void)setOption:(OFString *)type toStr:(OFString *)str;
 
-- (void)loadSoundFont:(OFString *)path;
+- (int)loadSoundFont:(OFString *)path withPreset:(int)preset;
+- (void)unloadSoundFont:(int)sfId withPreset:(int)preset;
 
 - (void)loadMidiFile:(OFString *)path;
 - (void)play;
