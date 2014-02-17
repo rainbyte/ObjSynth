@@ -1,6 +1,6 @@
 #import <ObjFW/ObjFW.h>
 
-#import "ObjSynth/ObjSynth.h"
+#import "ObjSynth.h"
 
 int main(int argc, char** argv)
 {

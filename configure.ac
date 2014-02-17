@@ -4,7 +4,10 @@
 AC_PREREQ([2.69])
 AC_INIT([ObjSynth], [0.1], [alvarofernandogarcia@gmail.com])
 AM_INIT_AUTOMAKE
-AC_CONFIG_SRCDIR([src/ObjSynth/ObjSynth.m])
+LT_PREREQ([2.2])
+LT_INIT([dlopen])
+
+AC_CONFIG_SRCDIR([src/ObjSynth.m])
 
 AC_CHECK_TOOL(OBJFW_CONFIG, objfw-config)
 AS_IF([test x"$OBJFW_CONFIG" = x""], [
@@ -17,7 +20,6 @@ AC_PROG_OBJC([clang])
 AC_PROG_OBJCPP
 AC_PROG_LN_S
 AC_PROG_INSTALL
-AC_PROG_RANLIB
 
 CPP="$OBJCPP"
 CPPFLAGS="$CPPFLAGS $OBJCPPFLAGS $($OBJFW_CONFIG --cppflags)"
@@ -56,7 +58,8 @@ AC_SUBST(CPPFLAGS)
 
 AC_CONFIG_FILES([
         Makefile
-        src/ObjSynth/Makefile
+        include/Makefile
+        src/Makefile
         examples/player/Makefile
 ])
 
