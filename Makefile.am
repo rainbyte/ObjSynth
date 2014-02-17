@@ -1,1 +1,1 @@
-SUBDIRS = src/ObjSynth src
+SUBDIRS = src/ObjSynth examples/player

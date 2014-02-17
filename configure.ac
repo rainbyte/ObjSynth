@@ -4,7 +4,7 @@
 AC_PREREQ([2.69])
 AC_INIT([ObjSynth], [0.1], [alvarofernandogarcia@gmail.com])
 AM_INIT_AUTOMAKE
-AC_CONFIG_SRCDIR([src/player.m])
+AC_CONFIG_SRCDIR([src/ObjSynth/ObjSynth.m])
 
 AC_CHECK_TOOL(OBJFW_CONFIG, objfw-config)
 AS_IF([test x"$OBJFW_CONFIG" = x""], [
@@ -56,8 +56,8 @@ AC_SUBST(CPPFLAGS)
 
 AC_CONFIG_FILES([
         Makefile
-        src/Makefile
         src/ObjSynth/Makefile
+        examples/player/Makefile
 ])
 
 AC_OUTPUT
