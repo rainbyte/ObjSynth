@@ -60,7 +60,7 @@ AC_CONFIG_FILES([
         Makefile
         include/Makefile
         src/Makefile
-        examples/player/Makefile
+        examples/Makefile
 ])
 
 AC_OUTPUT

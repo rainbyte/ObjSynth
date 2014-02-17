@@ -1,1 +1,1 @@
-SUBDIRS = include src examples/player
+SUBDIRS = include src examples
